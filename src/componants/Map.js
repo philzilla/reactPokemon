@@ -9,6 +9,31 @@ import "leaflet-defaulticon-compatibility";
 export const Map = () => {
   // code JS 👇
 
+  // Hooks : useState()
+  const [pokemons, setPokemons] = useState([])
+  console.log("1. Pokemon avant Fetch", pokemons);
+
+  // Hooks : useEffect()
+  useEffect(
+    () => {
+
+      // Self-Invoking Anonymous Function
+      (
+        // Fetch API Pokémon
+        async () => {
+          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/`)
+          const data = await res.json()
+          // Mettre à jour le state de la variable pokemons
+          setPokemons(data.results)
+        }
+      )()
+    },
+    []
+  )
+
+  console.log("2. Pokemon après Fetch", pokemons);
+
+
 
   return (
     // Code JS 👇
